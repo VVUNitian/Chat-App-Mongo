@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Chats</title>
+    <link rel="stylesheet" href="./styling.css">
+</head>
+<body>
+    <h1>All Chats</h1>
+    <form action="/chats/new" method="get">
+        <button>Type your message</button>    
+    </form>
+    <br>
+    <br>
+    <br>
+    <% for( let q of query ) { %>
+        <div class="msgbox">
+            <p> From : <%= q.from %></p>
+            <p> To : <%= q.to %></p>
+            <div class="message">
+                <p> <%= q.msg %></p>
+            </div>
+            <br>
+            <form action="/chats/<%= q._id %>/edit" method="get">
+                <button>Edit</button>
+            </form>
+            <br>
+            <form action="/chats/<%= q.id %>?_method=DELETE" method="post" class="dltbutton">
+                <button >DELETE</button>
+            </form>
+            <hr>
+            <p> <%= q.created_at.toString().split(" ").slice(0,4).join(" ") %></p>
+        </div>
+        <br>
+        <br>
+        <br>
+    <% } %>
+    <script src="/stylingjs.js"></script>
+</body>
+</html>
